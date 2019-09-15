@@ -11,7 +11,7 @@ void set_SF(uint32_t result, size_t data_size)
 }
 void set_PF(uint32_t result)
 {
-	uint32_t res = 1;
+	uint32_t res = 0;
 	for(int i = 0; i < 8; i++)
 	{
 		res ^= ((result >> i) & 0x1);
