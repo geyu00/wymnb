@@ -127,7 +127,7 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 	if(cpu.eflags.CF == 0)
 		set_OF_add(res, src_tra, dest, data_size);
 	else
-		set_OF_add(res, src_tra - 1, dest, data_size);
+		set_OF_add(res, src_tra, dest - 1, data_size);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
 	set_PF(res);
