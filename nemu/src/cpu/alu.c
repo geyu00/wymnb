@@ -281,8 +281,10 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 #else
 	uint32_t res = 0;
 	dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
-	res = (~(0xFFFFFFFF >> src)) | (dest >> src);
+	uint32_t tem = dest >> 31;
 	res = dest >> src;
+	for(int i = 0; i < src; i++)
+		res |= (tem << (31 - i));
 	set_CF_shr(src, dest);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
