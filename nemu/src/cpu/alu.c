@@ -14,7 +14,7 @@ void set_PF(uint32_t result)
 	uint32_t res = 1;
 	for(int i = 0; i < 8; i++)
 	{
-		res ^= ((x >> i) ^ 0x1;
+		res ^= ((result >> i) ^ 0x1);
 	}
 }
 void set_CF_add(uint32_t result, uint32_t src, size_t data_size)
