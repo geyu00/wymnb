@@ -121,7 +121,7 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_sbb(src, dest, data_size);
 #else
 	uint32_t res = 0;
-	uint32_t src_tra = (src ^ (0xFFFFFFFF >> (32 - data_size))) - cpu.eflags.OF;
+	uint32_t src_tra = (src ^ (0xFFFFFFFF >> (32 - data_size))) - cpu.eflags.CF;
 	res = dest + src_tra +0x1;
 	set_CF_sbb(dest, src, data_size);
 	set_OF_add(res, src_tra, dest, data_size);
