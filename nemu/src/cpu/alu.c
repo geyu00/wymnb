@@ -16,6 +16,7 @@ void set_PF(uint32_t result)
 	{
 		res ^= ((result >> i) & 0x1);
 	}
+	cpu.eflags.PF = res;
 }
 void set_CF_add(uint32_t result, uint32_t src, size_t data_size)
 {
