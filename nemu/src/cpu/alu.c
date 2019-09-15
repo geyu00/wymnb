@@ -121,10 +121,13 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_sbb(src, dest, data_size);
 #else
 	uint32_t res = 0;
-	uint32_t src_tra = (src ^ (0xFFFFFFFF >> (32 - data_size))) - cpu.eflags.CF;
-	res = dest + src_tra +0x1;
+	uint32_t src_tra = (src ^ (0xFFFFFFFF >> (32 - data_size)));
+	res = dest + src_tra +0x1 - cpu.eflags.CF;
 	set_CF_sbb(dest, src, data_size);
-	set_OF_add(res, src_tra, dest, data_size);
+	if(cpu.eflags.CF == 0)
+		set_OF_add(res, src_tra, dest, data_size);
+	else
+		set_OF_add(res, src_tra - 1, dest, data_size);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
 	set_PF(res);
