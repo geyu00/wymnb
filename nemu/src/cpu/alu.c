@@ -113,7 +113,7 @@ void set_CF_sbb(uint32_t dest, uint32_t src, size_t data_size)
 {
 	dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
 	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
-	if(src != (0xFFFFFFFF)
+	if(src != (0xFFFFFFFF))
 		cpu.eflags.CF = dest < (src + cpu.eflags.CF);
 	else
 		cpu.eflags.CF = (dest != 0xFFFFFFFF) || (cpu.eflags.CF == 1);	
