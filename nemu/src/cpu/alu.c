@@ -174,11 +174,10 @@ uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
 #else
 	src &= (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
 	dest &= (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
-	uint64_t res = 0;
+	uint32_t res = 0;
 	if(src == 0) return -1;
 	res = dest / src;
-	set_CF_OF(res, data_size);
-	return uint32_t(res & (0xFFFFFFFFFFFFFFFF >> (64 - data_size)));
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
