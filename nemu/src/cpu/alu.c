@@ -198,12 +198,10 @@ uint32_t alu_mod(uint64_t src, uint64_t dest)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_mod(src, dest);
 #else
-	src &= (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
-	dest &= (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
 	uint32_t res = 0;
 	if(src == 0) return -1;
 	res = dest % src;
-	return res & (0xFFFFFFFF >> (32 - data_size));
+	return res;
 #endif
 }
 
