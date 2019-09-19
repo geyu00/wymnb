@@ -162,7 +162,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	uint32_t shift = 0;
 
 	/* TODO: shift = ? */
-	shift = fb.exponent - fa.exponent;
+	shift = (fb.exponent == 0 ? fb.exponent + 1 : fb.exponent) - (fa.exponent == 0 ? fa.exponent + 1 : fa.exponent);
 
 	sig_a = (sig_a << 3); // guard, round, sticky
 	sig_b = (sig_b << 3);
@@ -288,8 +288,7 @@ uint32_t internal_float_mul(uint32_t b, uint32_t a)
 	uint32_t exp_res = 0;
 
 	/* TODO: exp_res = ? leave space for GRS bits. */
-	printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-	assert(0);
+	exp_res = fa.exponent + fb.exponent - 127 - 23 + 3;
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
