@@ -87,6 +87,13 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			sig_grs >>= 1;
 			exp++;
 		}
+		if (exp >= 0xff)
+		{
+			/* TODO: assign the number to infinity */
+			exp = 0xff;
+			sig_grs = 0x0;
+			overflow = true;
+		}
 	}
 	//sig_grs &= 0x7fffff;
 
