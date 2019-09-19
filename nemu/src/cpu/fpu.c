@@ -54,7 +54,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		while (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 		{
 			/* TODO: shift left */
-			sig_grs = (sig_grs << 1) | (sig_grs & 0x1);
+			sig_grs = (sig_grs << 1);
 			exp--;
 		}
 		if (exp == 0)
@@ -82,9 +82,9 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			else
 				sig_grs = (sig_grs >> 3);
 		}
-		while((sig_grs >> 23) > 1)
+		if((sig_grs >> 23) > 1)
 		{
-			sig_grs = (sig_grs >> 1) + ((sig_grs & 0x3) == 0x3); 
+			sig_grs = (sig_grs >> 1);
 			exp++;
 		}
 		sig_grs &= 0x7fffff;
