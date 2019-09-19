@@ -54,7 +54,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		while (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 		{
 			/* TODO: shift left */
-			sig_grs = (sig_grs << 1);
+			sig_grs = sig_grs << 1;
 			exp--;
 		}
 		if (exp == 0)
@@ -73,6 +73,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	if (!overflow)
 	{
 		/* TODO: round up and remove the GRS bits */
+		sig_grs &= (0xFFFFFFFFFFFFFFFF >> 37);
 		if((sig_grs & 0x7) > 0x4) sig_grs = (sig_grs >> 3) + 1;
 		else if((sig_grs & 0x7) < 0x4) sig_grs = (sig_grs >> 3);
 		else
@@ -86,13 +87,29 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		{
 			sig_grs >>= 1;
 			exp++;
-		}
-		if (exp >= 0xff)
-		{
-			/* TODO: assign the number to infinity */
-			exp = 0xff;
-			sig_grs = 0x0;
-			overflow = true;
+			
+			if (exp >= 0xff)
+			{
+				/* TODO: assign the number to infinity */
+				exp = 0xff;
+				sig_grs = 0x0;
+				overflow = true;
+			}
+		
+			if (exp == 0)
+			{
+				// we have a denormal here, the exponent is 0, but means 2^-126,
+				// as a result, the significand should shift right once more
+				/* TODO: shift right, pay attention to sticky bit*/
+				sig_grs =  (sig_grs & 0x1) | (sig_grs >> 1);
+			}
+			if (exp < 0)
+			{
+				/* TODO: assign the number to zero */
+				exp = 0x0;
+				sig_grs = 0x0;
+				overflow = true;
+			}
 		}
 	}
 	sig_grs &= 0x7fffff;
