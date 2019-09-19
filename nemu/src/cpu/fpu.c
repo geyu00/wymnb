@@ -82,7 +82,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			else
 				sig_grs = (sig_grs >> 3);
 		}
-		while(((sig_grs >> 23) > 1) & exp < 0xff)
+		while(((sig_grs >> 23) > 1) & (exp < 0xff))
 		{
 			sig_grs = (sig_grs >> 1);
 			exp++;
