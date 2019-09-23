@@ -109,14 +109,14 @@ uint32_t alu_sub(uint32_t src, uint32_t dest, size_t data_size)
 	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
-void set_CF_sbb(uint32_t dest, uint32_t src, size_t data_size)
+void set_CF_sbb(uint32_t dest, uint32_t res, size_t data_size)
 {
 	dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
-	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
-	if(src != (0xFFFFFFFF))
-		cpu.eflags.CF = dest < (src + cpu.eflags.CF);
+	res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	if(cpu.eflags.CF == 0)
+		cpu.eflags.CF = dest < res;
 	else
-		cpu.eflags.CF = (dest != 0xFFFFFFFF) || (cpu.eflags.CF == 1);	
+		cpu.eflags.CF = dest <= res;	
 }
 uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 {
@@ -126,7 +126,7 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 	uint32_t res = 0;
 	uint32_t src_tra = (src ^ (0xFFFFFFFF >> (32 - data_size)));
 	res = dest + src_tra +0x1 - cpu.eflags.CF;
-	set_CF_sbb(dest, src, data_size);
+	set_CF_sbb(dest, res, data_size);
 	set_OF_add(res, src_tra, dest, data_size);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
