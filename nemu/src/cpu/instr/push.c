@@ -2,8 +2,8 @@
 static void instr_execute_1op() 
 {
 	operand_read(&opr_src);
-	opr_dest.val = opr_src.val;
-	operand_write(&opr_dest);
+	opr_src.addr -= opr_src.data_size/8;
+	operand_write(&opr_src);
 }
 make_instr_impl_1op(push, r, v)
 make_instr_impl_1op(push, rm, v)
