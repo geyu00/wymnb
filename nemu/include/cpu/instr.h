@@ -14,6 +14,7 @@
 
 extern uint8_t data_size;
 
+#include "cpu/instr/push.h"
 #include "cpu/instr/mov.h"
 #include "cpu/instr/jmp.h"
 #include "cpu/instr/shift.h"
