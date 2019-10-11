@@ -1,7 +1,7 @@
 #include "cpu/instr.h"
 static void instr_execute_1op() 
 {
-	operand_read(&opr_src);
+	//operand_read(&opr_src);
 	//cpu.esp -= opr_src.data_size/8;	
 	//opr_src.addr = cpu.esp;
 	//*cpu.esp = opr_src.val;
