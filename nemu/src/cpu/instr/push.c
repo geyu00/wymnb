@@ -2,9 +2,9 @@
 static void instr_execute_1op() 
 {
 	operand_read(&opr_src);
-	cpu.esp -= opr_src.data_size/8;	
+	//cpu.esp -= opr_src.data_size/8;	
 	//opr_src.addr = cpu.esp;
-	*cpu.esp = opr_src.val;
+	//*cpu.esp = opr_src.val;
 }
 make_instr_impl_1op(push, r, v)
 make_instr_impl_1op(push, rm, v)
