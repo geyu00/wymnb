@@ -7,5 +7,5 @@ make_instr_func(ret_near)
 
 	cpu.esp += 4;
 
-	return 0;
+	return 1 + data_size / 8;
 }
