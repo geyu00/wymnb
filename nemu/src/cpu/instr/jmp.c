@@ -28,11 +28,11 @@ make_instr_func(jmp_short)
 
         operand_read(&rel);
 
-        int offset = sign_ext(rel.val, data_size);
+        int offset = sign_ext(rel.val, 8;
         
-        print_asm_1("jmp", "", 1 + data_size / 8, &rel);
+        print_asm_1("jmp", "", 1 + 1, &rel);
 
         cpu.eip += offset;
 
-        return 1 + data_size / 8;
+        return 1 + 1;
 }
