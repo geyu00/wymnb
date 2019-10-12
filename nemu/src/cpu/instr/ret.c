@@ -12,7 +12,7 @@ make_instr_func(ret_near)
 
         int offset = sign_ext(rel.val, data_size);
         // thank Ting Xu from CS'17 for finding this bug
-        print_asm_1("call", "", 1 + data_size / 8, &rel);
+        print_asm_1("ret", "", 1 + data_size / 8, &rel);
 
         cpu.eip -= offset;
 	cpu.esp += data_size / 8;
