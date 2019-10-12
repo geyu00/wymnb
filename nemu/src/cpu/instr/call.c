@@ -10,9 +10,9 @@ make_instr_func(call_near)
 
         operand_read(&rel);
         int offset = sign_ext(rel.val, data_size);
-        print_asm_1("call", "", 1 + data_size / 8, &rel);
-	cpu.esp -= data_size / 8;
+        cpu.esp -= data_size / 8;
 	*(int *)cpu.esp = cpu.eip;
+	print_asm_1("call", "", 1 + data_size / 8, &rel);
 	cpu.eip += offset;
         return 1 + data_size / 8;
 
