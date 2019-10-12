@@ -1,8 +1,6 @@
 #ifndef __INSTR_JCC_H__
 #define __INSTR_JCC_H__
 
-make_instr_func(jmp_near);
-make_instr_func(jmp_short);
 make_instr_func(jo_short_);
 make_instr_func(jno_short_);
 make_instr_func(jb_short_);
