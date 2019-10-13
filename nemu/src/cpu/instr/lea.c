@@ -1,5 +1,5 @@
 #include "cpu/instr.h"
-/*make_instr_func(lea) {
+make_instr_func(lea) {
 	int len = 1;
 	OPERAND r, rm;
 	r.data_size = 32;
@@ -12,12 +12,12 @@
 
 	print_asm_2("lea", "", len, &rm, &r);
 	return len;
-}*/
-static void instr_execute_2op() 
+}
+/*static void instr_execute_2op() 
 {
 	operand_read(&opr_src);
 	opr_dest.val = opr_src.addr;
 	operand_write(&opr_dest);
 }
 
-make_instr_impl_2op(lea, rm, r, v)
+make_instr_impl_2op(lea, rm, r, v)*/
