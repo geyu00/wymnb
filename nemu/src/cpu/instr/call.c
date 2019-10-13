@@ -13,7 +13,7 @@ make_instr_func(call_near)
         cpu.esp -= data_size / 8;
 	//*(int *)cpu.esp = cpu.eip;
 	OPERAND tem;
-	tem.type = OPR_MEN;
+	tem.type = OPR_MEM;
 	tem.data_size = 32;
 	tem.addr = cpu.esp;
 	tem.val = cpu.eip;
