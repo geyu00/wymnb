@@ -9,7 +9,7 @@ make_instr_func(ret_near)
 	tem.data_size = 32;
 	tem.addr = cpu.eip;
 	
-	res.type = OPR_MEN;
+	res.type = OPR_MEM;
 	res.data_size = 32;
 	res.addr = cpu.esp;
 	operand_read(&res);
