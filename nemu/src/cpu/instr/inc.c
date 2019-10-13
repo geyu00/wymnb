@@ -1,6 +1,6 @@
 #include "cpu/instr.h"
 
-instr_execute_1op();
+instr_execute_1op()
 {
 	operand_read(&opr_src);
 	opr_src.val = alu_add(1, opr_src.val, opr_src.data_size);
