@@ -13,5 +13,5 @@ make_instr_func(ret_near)
 	
 	print_asm_0("ret", "", 1);
 	cpu.esp += data_size / 8;
-	return 1 + data_size / 8;
+	return 0;
 }
