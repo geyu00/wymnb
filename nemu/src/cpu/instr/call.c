@@ -16,7 +16,7 @@ make_instr_func(call_near)
 	tem.type = OPR_MEM;
 	tem.data_size = 32;
 	tem.addr = cpu.esp;
-	tem.val = cpu.eip;
+	tem.val = cpu.eip + 1 + data_size / 8;
 	operand_write(&tem);
 	
 
