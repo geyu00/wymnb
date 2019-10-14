@@ -75,10 +75,7 @@ void print_asm_3(char *instr, char *suffix, uint8_t len, OPERAND *opr_1, OPERAND
 #define decode_data_size_v opr_src.data_size = opr_dest.data_size = data_size;
 #define decode_data_size_bv \
 	opr_src.data_size = 8;  \
-	opr_dest.data_size = data_size;\
-	operand_read(&opr_src);\
-	opr_src.val = sign_ext(opr_src.val, 8);\
-	operand_write(&opr_src);
+	opr_dest.data_size = data_size;
 #define decode_data_size_short_ opr_src.data_size = opr_dest.data_size = 8;
 #define decode_data_size_near opr_src.data_size = opr_dest.data_size = 32;
 
