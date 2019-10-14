@@ -3,7 +3,7 @@ static void instr_execute_1op()
 {
 	OPERAND rel;
 	rel.addr = cpu.esp;
-	rel.type = MEM;
+	rel.type = OPR_MEM;
 	rel.data_size = data_size;
 	operand_read(&rel);
 	opr_src.val = rel.val;
