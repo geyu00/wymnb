@@ -17,7 +17,7 @@ make_instr_impl_2op(and, i, a, v)
 //make_instr_impl_2op(and, i, rm, bv)
 make_instr_impl_2op(and, i, rm, v)
 
-make)instr_func(and_i2rm_bv)
+make_instr_func(and_i2rm_bv)
 {
 	int len = 1;
         OPERAND rm, i;
