@@ -164,7 +164,7 @@ void print_asm_3(char *instr, char *suffix, uint8_t len, OPERAND *opr_1, OPERAND
 // conditions
 // possible condition: e, a, ae, b, be, o, p, s , ne, na, no, np, ns, g, ge, l, le, ecxz
 
-static inline bool inv_cc();
+//static inline bool inv_cc();
 
 #define condition_e \
 	cpu.eflags.ZF == 1
@@ -223,11 +223,11 @@ static inline bool inv_cc();
 #define condition_c \
 	cpu.eflags.CF == 1
 
-static inline bool inv_cc()
+/*static inline bool inv_cc()
 {
 	printf("Please implement cc condition in instr_helper.h\n");
 	assert(0);
 	return false;
-}
+}*/
 
 #endif
