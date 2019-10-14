@@ -17,7 +17,7 @@ make_instr_impl_2op(adc, i, a, v)
 //make_instr_impl_2op(adc, i, rm, bv)
 make_instr_impl_2op(adc, i, rm, v)
 
-make_instr_func(add_i2rm_bv)
+make_instr_func(adc_i2rm_bv)
 {
 	int len = 1;
         OPERAND rm, i;
@@ -32,8 +32,8 @@ make_instr_func(add_i2rm_bv)
 	len += i.data_size / 8;
         operand_read(&i);
         operand_read(&rm);
-        rm.val = alu_add(sign_ext(i.val, 8), rm.val, rm.data_size);
+        rm.val = alu_adc(sign_ext(i.val, 8), rm.val, rm.data_size);
         operand_write(&rm);
-	print_asm_2("add", "", len, &i, &rm);
+	print_asm_2("adc", "", len, &i, &rm);
         return len;
 }
