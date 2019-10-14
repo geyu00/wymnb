@@ -21,12 +21,16 @@ make_instr_func(and_i2rm_bv)
 {
 	int len = 1;
         OPERAND rm, i;
-	i.type = OPR_IMM;
+	
         i.data_size = 8;
-        rm.data_size = data_size;
+	rm.data_size = data_size;
+	len += modrm_rm(eip + 1, &rm);
+        i.type = OPR_IMM;
+	i.sreg = SREG_GS;
+	i.addr = eip + len;
 	rm.type = OPR_MEM;
-        len += modrm_rm(eip + 1, &rm);
         operand_read(&i);
+        operand_read(&rm);
         rm.val = alu_and(sign_ext(i.val, 8), rm.val, rm.data_size);
         operand_write(&rm);
 	print_asm_2("and", "", len, &i, &rm);
