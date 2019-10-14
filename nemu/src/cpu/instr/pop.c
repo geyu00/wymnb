@@ -6,7 +6,8 @@ static void instr_execute_1op()
 	rel.type = OPR_MEM;
 	rel.data_size = data_size;
 	operand_read(&rel);
-	opr_src.val = rel.val;cpu.esp += opr_src.data_size / 8;
+	opr_src.val = rel.val;
+	cpu.esp += opr_src.data_size / 8;
 	operand_write(&opr_src);
 	
 	
