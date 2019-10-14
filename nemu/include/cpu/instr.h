@@ -14,6 +14,7 @@
 
 extern uint8_t data_size;
 
+#include "cpi/instr/dec.h"
 #include "cpu/instr/pop.h"
 #include "cpu/instr/test.h"
 #include "cpu/instr/inc.h"
