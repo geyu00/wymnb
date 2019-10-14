@@ -2,7 +2,6 @@
 
 make_instr_func(ret_near)
 {
-	//cpu.eip = *(int *)cpu.esp;
 	OPERAND tem;
 	tem.type = OPR_MEM;
 	tem.data_size = data_size;
