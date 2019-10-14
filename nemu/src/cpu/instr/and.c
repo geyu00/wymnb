@@ -29,6 +29,7 @@ make_instr_func(and_i2rm_bv)
 	i.sreg = SREG_GS;
 	i.addr = eip + len;
 	rm.type = OPR_MEM;
+	len += i.data_size / 8;
         operand_read(&i);
         operand_read(&rm);
         rm.val = alu_and(sign_ext(i.val, 8), rm.val, rm.data_size);
