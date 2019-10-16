@@ -49,5 +49,5 @@ make_instr_func(jmp_near_indirect)
 
         cpu.eip = rel.val;
 
-        return 0;
+        return len;
 }
