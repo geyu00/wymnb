@@ -16,6 +16,7 @@ make_instr_impl_2op(xor, i, a, b)
 make_instr_impl_2op(xor, i, a, v)
 //make_instr_impl_2op(xor, i, rm, bv)
 make_instr_impl_2op(xor, i, rm, v)
+make_instr_impl_2op(xor, i, rm, b)
 
 make_instr_func(xor_i2rm_bv)
 {
