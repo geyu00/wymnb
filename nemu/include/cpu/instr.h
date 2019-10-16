@@ -14,6 +14,7 @@
 
 extern uint8_t data_size;
 
+#include "cpu/instr/cmps.h"
 #include "cpu/instr/stos.h"
 #include "cpu/instr/imul.h"
 #include "cpu/instr/mul.h"
