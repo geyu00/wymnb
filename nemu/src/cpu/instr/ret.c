@@ -21,10 +21,10 @@ make_instr_func(ret_near_imm16)
 	int len = 1;
 	OPERAND tem;
 	tem.data_size = 16;
-	len += modrm_rm(eip + 1, &rel);
+	len += modrm_rm(eip + 1, &tem);
 	tem.addr = cpu.esp;
 	operand_read(&tem);
-	print_asm_1("ret", "", 3, &rel);
+	print_asm_1("ret", "", 3, &tem);
 	cpu.eip = tem.val + len;
 	return 0;
 }
