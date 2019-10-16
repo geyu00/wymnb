@@ -15,3 +15,16 @@ make_instr_func(ret_near)
 	cpu.esp += data_size / 8;
 	return 0;
 }
+
+make_instr_func(ret_near_imm16)
+{
+	int len = 1;
+	OPERAND tem;
+	tem.data_size = data_size;
+	len += modrm_rm(eip + 1, &rel);
+	tem.addr = cpu.esp;
+	operand_read(&tem);
+	print_asm_1("ret", "", 3, &rel);
+	cpu.eip = tem.val;
+	return 0;
+}
