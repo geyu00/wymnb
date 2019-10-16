@@ -26,5 +26,5 @@ make_instr_func(ret_near_imm16)
 	operand_read(&tem);
 	print_asm_1("ret", "", 3, &tem);
 	cpu.eip = tem.val + len;
-	return 0;
+	return 1;
 }
