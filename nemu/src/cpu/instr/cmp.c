@@ -32,7 +32,7 @@ make_instr_func(cmp_i2rm_bv)
 	len += i.data_size / 8;
         operand_read(&i);
         operand_read(&rm);
-        alu_sub(sign_ext(i.val & 0xFF, 8), rm.val, rm.data_size);
+        alu_sub(sign_ext(i.val , 8), rm.val, rm.data_size);
         //operand_write(&rm);
 	print_asm_2("cmp", "", len, &i, &rm);
         return len;
