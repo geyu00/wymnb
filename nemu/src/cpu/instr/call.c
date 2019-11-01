@@ -25,7 +25,7 @@ make_instr_func(call_near)
         return 1 + data_size / 8;	
 }
 
-make_instr_func(jmp_near_indirect)
+make_instr_func(call_near_indirect)
 {
 	int len = 1;
 	OPERAND rel;
