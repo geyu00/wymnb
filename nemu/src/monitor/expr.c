@@ -211,7 +211,7 @@ uint32_t eval(int p, int q)
 	else
 	{
 		int op = dominant_operator(p, q);
-		int val;
+		int val1;
 		if( p != op)
 			val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
