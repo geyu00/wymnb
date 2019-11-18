@@ -127,7 +127,7 @@ static bool make_token(char *e)
 				{
 				case NOTYPE: break;
 				case NUM: case HEX: case SYMB:
-					if (substr_len) > 32)
+					if (substr_len > 32)
 					{
 						printf("Buffer Overflow!\n");
 						assert(0);
