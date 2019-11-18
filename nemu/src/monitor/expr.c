@@ -206,7 +206,23 @@ bool check_parentheses(int p, int q)
 
 int dominant_operator(int p, int q)
 {
-	
+	int left_bracket = 0, right_bracket = 0;
+	int result = -1;
+	for (int i = p; i <= q; i++)
+	{
+		if (tokens[i].type == '(')
+			left_bracket++;
+		else if (tokens[i].type == ')')
+			right_bracket++;
+		else if (tokens[i].type == NUM || tokens[i].type == HEX || tokens[i].type == SYMB);
+		else
+		{
+			if (left_bracket > right_bracket);
+			else if (result == -1 || priority(i) <= priority(result))
+				result = i;
+		}
+	}
+	return result;
 }
 
 int priority(int my_nr_token)
