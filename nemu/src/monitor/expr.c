@@ -232,7 +232,7 @@ int priority(int my_nr_token)
 	{
 	case EQ: case NEQ:
 		res = 0;
-		bresk;
+		break;
 	case '+': case '-':
 		res = 1;
 		break;
@@ -256,7 +256,7 @@ int priority(int my_nr_token)
 uint32_t hex_to_dec(char *m_s)
 {
 	uint32_t res = 0;
-	for (int i = 2; i < strlen(s); i++)
+	for (int i = 2; i < strlen(m_s); i++)
 	{
 		res *= 16;
 		if (m_s[i] >= '0' && m_s[i] <= '9')
