@@ -194,13 +194,14 @@ uint32_t eval(int p, int q)
 	}
 	else if (p == q)
 	{
+		bool success;
+		uint32_t res;
 		switch (tokens[p].type)
 		{
 		case NUM: return (uint32_t)atoi(tokens[p].str);
 		case HEX: return hex_to_dec(tokens[p].str);
 		case SYMB:
-			bool success;
-			uint32_t res = look_up_symtab(tokens[p].str, &success);
+			res = look_up_symtab(tokens[p].str, &success);
 			if(success) return res;
 			else
 			{
@@ -216,7 +217,7 @@ uint32_t eval(int p, int q)
 		return eval(p + 1, q - 1);
 	else
 	{
-		int op = dominant_operation(p, q);
+		int op = dominant_operator(p, q);
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
 		switch (tokens[op].type)
