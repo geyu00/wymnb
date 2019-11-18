@@ -196,7 +196,7 @@ bool check_parentheses(int p, int q)
 	{
 		if (tokens[i].type == '(')
 			left_bracket++;
-		else if (tokens[i].type ==' )')
+		else if (tokens[i].type == ')')
 			right_bracket++;
 		if(left_bracket < right_bracket)
 			return false;
