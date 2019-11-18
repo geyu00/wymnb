@@ -15,6 +15,8 @@ bool check_parentheses(int p, int q);
 int dominant_operator(int p, int q);
 int priority(int my_nr_token);
 uint32_t hex_to_dec(char *m_s);
+void bad_expression();
+uint32_t look_up_symtab(char *sym, bool *success);
 
 enum
 {
@@ -185,6 +187,18 @@ uint32_t expr(char *e, bool *success)
 
 uint32_t eval(int p, int q)
 {
+	if (p > q)
+	{
+		bad_expression();
+		return 0;
+	}
+	else if (p == q)
+	{
+		switch (tokens[p].type)
+		{
+		case NUM: atoi();
+		}
+	}
 }
 
 bool check_parentheses(int p, int q)
@@ -271,7 +285,11 @@ uint32_t hex_to_dec(char *m_s)
 	return res;
 }
 
-
+void bad_expression()
+{
+	printf("Bad Expression!\n");
+	assert(0);
+}
 
 
 
