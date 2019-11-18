@@ -259,7 +259,7 @@ int dominant_operator(int p, int q)
 		else if (tokens[i].type == NUM || tokens[i].type == HEX || tokens[i].type == SYMB);
 		else
 		{
-			if (left_bracket > right_bracket);
+			if (left_bracket != right_bracket);
 			else if (result == -1 || priority(i) <= priority(result))
 				result = i;
 		}
