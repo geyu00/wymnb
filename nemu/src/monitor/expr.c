@@ -250,7 +250,7 @@ int dominant_operator(int p, int q)
 {
 	int left_bracket = 0, right_bracket = 0;
 	int result = -1;
-	for (int i = p; i <= q; i++)
+	for (int i = p + 1; i < q; i++)
 	{
 		if (tokens[i].type == '(')
 			left_bracket++;
@@ -289,6 +289,9 @@ int priority(int my_nr_token)
 		break;
 	case NEG:
 		res = 5;
+		break;
+	case '(': case ')':
+		res = 6;
 		break;
 	default:
 		res = -1;
