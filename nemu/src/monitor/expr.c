@@ -243,14 +243,16 @@ int priority(int my_nr_token)
 		res = 3;
 		break;
 	case NUM: case HEX: case SYMB:
-		return 4;
+		res = 4;
 		break;
 	case NEG:
-		return 5;
+		res = 5;
 		break;
 	default:
-		return -1;
+		res = -1;
+		break;
 	}
+	return res;
 }
 
 uint32_t hex_to_dec(char *m_s)
