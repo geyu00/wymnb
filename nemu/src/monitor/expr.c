@@ -16,8 +16,8 @@ int dominant_operator(int p, int q);
 int priority(int my_nr_token);
 uint32_t hex_to_dec(char *m_s);
 void bad_expression();
-uint32_t look_up_symtab(char *sym, bool *success);
-
+//uint32_t look_up_symtab(char *sym, bool *success);
+look_up_symtab();
 enum
 {
 	NOTYPE = 256,
@@ -196,7 +196,8 @@ uint32_t eval(int p, int q)
 	{
 		switch (tokens[p].type)
 		{
-		case NUM: atoi();
+		case NUM: return (uint32_t)atoi(tokens[p].str);
+		case HEX: return hex_to_dec(tokens[p].str)
 		}
 	}
 }
