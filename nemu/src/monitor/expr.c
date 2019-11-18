@@ -234,7 +234,7 @@ bool check_parentheses(int p, int q)
 	if (tokens[p].type!='(' || tokens[q].type!=')')
 		return false;
 	int left_bracket = 0, right_bracket = 0;
-	for (int i = p; i <= q; i++)
+	for (int i = p + 1; i < q; i++)
 	{
 		if (tokens[i].type == '(')
 			left_bracket++;
@@ -250,7 +250,7 @@ int dominant_operator(int p, int q)
 {
 	int left_bracket = 0, right_bracket = 0;
 	int result = -1;
-	for (int i = p + 1; i < q; i++)
+	for (int i = p; i <= q; i++)
 	{
 		if (tokens[i].type == '(')
 			left_bracket++;
