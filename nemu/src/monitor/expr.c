@@ -10,13 +10,30 @@
 #include <sys/types.h>
 #include <regex.h>
 
+uint32_t eval(int p, int q);
+bool check_parentheses(int p, int q);
+int dominant_operator(int p, int q);
+int priority(int my_nr_token);
+uint32_t hex_to_dec(char *m_s);
+
 enum
 {
 	NOTYPE = 256,
 	EQ,
+	NEQ,
 	NUM,
 	REG,
-	SYMB
+	SYMB,
+	'+',
+	'-',
+	'*',
+	'/',
+	'%',
+	'(',
+	')',
+	HEX,
+	DEREF,
+	NEG
 
 	/* TODO: Add more token types */
 
@@ -33,7 +50,19 @@ static struct rule
 	 */
 
 	{" +", NOTYPE}, // white space
+	{"==", EQ},
+	{"!=", NEQ},
+	{"[0-9]+", NUM},
+	{"$e[(ax)(bx)(cx)(dx)(si)(sp)(di)(dp)", REG],
+	{"[a-zA-Z][a-zA-Z0-9]*", SYMB},
 	{"\\+", '+'},
+	{"-", '-'},
+	{"\\*", '*'},
+	{"/", '/'},
+	{"%", '%'},
+	{"\\(", '('},
+	{"\\)", ')'},
+	{"0[Xx][0-9a-fA-F]{1,8}", HEX}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]))
@@ -96,6 +125,18 @@ static bool make_token(char *e)
 
 				switch (rules[i].token_type)
 				{
+				case NOTYPE: break;
+				case NUM: case HEX: case SYMB:
+					if (substr_len) > 32)
+					{
+						printf("Buffer Overflow!\n");
+						assert(0);
+					}
+					else
+					{
+						strncpy(tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len] = '\0';
+					}
 				default:
 					tokens[nr_token].type = rules[i].token_type;
 					nr_token++;
@@ -123,8 +164,116 @@ uint32_t expr(char *e, bool *success)
 		return 0;
 	}
 
-	printf("\nPlease implement expr at expr.c\n");
-	assert(0);
+	//printf("\nPlease implement expr at expr.c\n");
+	//assert(0);
 
-	return 0;
+	*success = true;
+	for (int i = 0; i < nr_token; i++)
+	{
+		if (tokens[i].type == '-' && (i == 0 || (tokens[i - 1].type != NUM && tokens[i - 1].type != HEX && tokens[i - 1].type != SYMB && tokens[i - 1].type != ')')))
+		{
+			tokens[i].type = NEG;
+		}
+		else if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != NUM && tokens[i - 1].type != HEX && tokens[i - 1].type != SYMB && tokens[i - 1].type != ')')))
+		{
+			tokens[i].type = DEREF;
+		}
+	}
+
+	return eval(0, nr_token - 1);
 }
+
+uint32_t eval(int p, int q)
+{
+}
+
+bool check_parentheses(int p, int q)
+{
+	if (tokens[p].type!='(' || tokens[q].type!=')')
+		return false;
+	int left_bracket = 0, right_bracket = 0;
+	for (int i = p; i <= q; i++)
+	{
+		if (tokens[i].type == '(')
+			left_bracket++;
+		else if (tokens[i].type ==' )')
+			right_bracket++;
+		if(left_bracket < right_bracket)
+			return false;
+	}
+	return left_bracket==right_bracket;
+}
+
+int dominant_operator(int p, int q)
+{
+	
+}
+
+int priority(int my_nr_token)
+{
+	int res = 0;
+	switch (tokens[my_nr_token].type)
+	{
+	case EQ: case NEQ:
+		res = 0;
+		bresk;
+	case '+': case '-':
+		res = 1;
+		break;
+	case '*': case '/': case '%':
+		res = 2;
+		break;
+	case DEREF:
+		res = 3;
+		break;
+	case NUM: case HEX: case SYMB:
+		return 4;
+		break;
+	case NEG:
+		return 5;
+		break;
+	default:
+		return -1;
+	}
+}
+
+uint32_t hex_to_dec(char *m_s)
+{
+	uint32_t res = 0;
+	for (int i = 2; i < strlen(s); i++)
+	{
+		res *= 16;
+		if (m_s[i] >= '0' && m_s[i] <= '9')
+			res += m_s[i] -'0';
+		else if(m_s[i] >= 'a' && m_s[i] <= 'f')
+			res += m_s[i] -'a' + 10;
+		else if(m_s[i] >= 'A' && m_s[i] <= 'F')
+			res += m_s[i] -'A' + 10;
+	}
+	return res;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
