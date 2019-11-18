@@ -192,7 +192,7 @@ uint32_t eval(int p, int q)
 		switch (tokens[p].type)
 		{
 		case NUM: return (uint32_t)atoi(tokens[p].str);
-		case HEX: return hex_to_dec(tokens[p].str);
+		case HEX: return (uint32_t)hex_to_dec(tokens[p].str);
 		case SYMB:
 			res = look_up_symtab(tokens[p].str, &success);
 			if(success) return res;
