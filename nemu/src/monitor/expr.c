@@ -16,8 +16,8 @@ int dominant_operator(int p, int q);
 int priority(int my_nr_token);
 uint32_t hex_to_dec(char *m_s);
 void bad_expression();
-//uint32_t look_up_symtab(char *sym, bool *success);
-look_up_symtab();
+uint32_t look_up_symtab(char *sym, bool *success);
+
 enum
 {
 	NOTYPE = 256,
@@ -197,7 +197,40 @@ uint32_t eval(int p, int q)
 		switch (tokens[p].type)
 		{
 		case NUM: return (uint32_t)atoi(tokens[p].str);
-		case HEX: return hex_to_dec(tokens[p].str)
+		case HEX: return hex_to_dec(tokens[p].str);
+		case SYMB:
+			bool success;
+			uint32_t res = look_up_symtab(tokens[p].str, &success);
+			if(success) return res;
+			else
+			{
+				bad_expression();
+				return 0;
+			}
+		default:
+			bad_expression();
+			return 0;
+		}
+	}
+	else if (check_parentheses(p, q) == true)
+		return eval(p + 1, q - 1);
+	else
+	{
+		int op = dominant(p, q);
+		int val1 = eval(p, op - 1);
+		int val2 = eval(op + 1, q);
+		switch (tokens[op].type)
+		{
+		case '+': return val1 + val2;
+		case '-': return val1 - val2;
+		case '*': return val1 * val2;
+		case '/': return val1 / val2;
+		case '%': return val1 % val2;
+		case EQ: return val1 == val2;
+		case NEQ: return val1 != val2;
+		case DEREF: return vaddr_read((uint32_t)val2, SREG_CS, 4);
+		case NEG: return -val2;
+		default: bad_expression(); return 0;
 		}
 	}
 }
