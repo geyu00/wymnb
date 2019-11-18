@@ -47,7 +47,6 @@ static struct rule
 	{" +", NOTYPE}, // white space
 	{"==", EQ},
 	{"!=", NEQ},
-	{"[0-9]+", NUM},
 	{"$e[(ax)(bx)(cx)(dx)(si)(sp)(di)(dp)]", REG},
 	{"[a-zA-Z][a-zA-Z0-9]*", SYMB},
 	{"\\+", '+'},
@@ -57,7 +56,8 @@ static struct rule
 	{"%", '%'},
 	{"\\(", '('},
 	{"\\)", ')'},
-	{"0[Xx][0-9a-fA-F]{1,8}", HEX}
+	{"0[Xx][0-9a-fA-F]{1,8}", HEX,
+	{"[0-9]+", NUM}}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]))
