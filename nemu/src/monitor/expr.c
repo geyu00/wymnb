@@ -181,7 +181,7 @@ uint32_t expr(char *e, bool *success)
 			tokens[i].type = DEREF;
 		}
 	}
-	printf("%d\n",nr_token);
+	printf("*%d*\n",nr_token);
 	return eval(0, nr_token - 1);
 }
 
