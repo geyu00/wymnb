@@ -53,7 +53,7 @@ static struct rule
 	{"==", EQ},
 	{"!=", NEQ},
 	{"[0-9]+", NUM},
-	{"$e[(ax)(bx)(cx)(dx)(si)(sp)(di)(dp)", REG],
+	{"$e[(ax)(bx)(cx)(dx)(si)(sp)(di)(dp)", REG]},
 	{"[a-zA-Z][a-zA-Z0-9]*", SYMB},
 	{"\\+", '+'},
 	{"-", '-'},
