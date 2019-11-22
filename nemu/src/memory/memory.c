@@ -1,6 +1,7 @@
 #include "nemu.h"
 #include "cpu/cpu.h"
 #include "memory/memory.h"
+#include "memory/cache.h"
 #include "device/mm_io.h"
 #include <memory.h>
 #include <stdio.h>
@@ -22,13 +23,21 @@ void hw_mem_write(paddr_t paddr, size_t len, uint32_t data)
 uint32_t paddr_read(paddr_t paddr, size_t len)
 {
 	uint32_t ret = 0;
-	ret = hw_mem_read(paddr, len);
+	#ifdef CACHE_ENABLED
+		ret = cache_read(paddr, len, &L1_dcache);
+	#else
+		ret = hw_mem_read(paddr, len);
+	#endif
 	return ret;
 }
 
 void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 {
-	hw_mem_write(paddr, len, data);
+	#ifdef CACHE_ENABLED
+		cache_write(paddr, len, data, &L1_dcache);
+	#else
+		hw_mem_write(paddr, len, data);
+	#endif
 }
 
 uint32_t laddr_read(laddr_t laddr, size_t len)
@@ -56,7 +65,12 @@ void vaddr_write(vaddr_t vaddr, uint8_t sreg, size_t len, uint32_t data)
 void init_mem()
 {
 	// clear the memory on initiation
-	memset(hw_mem, 0, MEM_SIZE_B);
+	#ifdef CACHE_ENABLED
+		init_cache();
+	#else
+		memset(hw_mem, 0, MEM_SIZE_B);
+	#endif
+
 
 #ifdef TLB_ENABLED
 	make_all_tlb();
