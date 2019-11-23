@@ -1,6 +1,7 @@
 #ifndef __CACHE_H__
 #define __CACHE_H__
 
+#include "nemu.h"
 typedef struct {
 	uint32_t valid:1;
 	uint32_t tag:19;
