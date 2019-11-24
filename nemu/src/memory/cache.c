@@ -12,7 +12,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	uint32_t res = 0;
 	for (int i = len - 1; i >= 0; i--)
 	{
-		res >= 8;
+		res <<= 8;
 		uint32_t tag = ((paddr + i) >> 13) & 0x7ffff;
 		uint32_t cache_number = ((paddr + i) >> 6) & 0x7f;
 		uint32_t block_addr = (paddr + i) & 0x3f;
