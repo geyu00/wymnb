@@ -22,7 +22,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 		if (L1_dcache[cache_number][i].valid && L1_dcache[cache_number][i].tag == tag)
 		{
 			memcpy(hw_mem + paddr, &data, len);
-			memcpy(L1_dcache[cache_number][i].data[block_addr], &data, len);
+			memcpy(&L1_dcache[cache_number][i].data[block_addr], &data, len);
 			exist = true;
 			break;
 		}
