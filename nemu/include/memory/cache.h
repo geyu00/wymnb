@@ -11,7 +11,7 @@ typedef struct {
 CacheLine L1_dcache[128][8];
 
 void init_cache();
-uint32_t cache_read(paddr_t paddr, size_t len, CacheLine cache[128][8]);
-void cache_write(paddr_t paddr, size_t len, uint32_t data, CacheLine cache[128][8]);
+uint32_t cache_read(paddr_t paddr, size_t len);
+void cache_write(paddr_t paddr, size_t len, uint32_t data);
 
 #endif
