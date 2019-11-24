@@ -26,7 +26,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 				break;
 			}
 		}
-		if (!exsit)
+		if (!exist)
 		{
 			int j;
 			for (j = 0; j < 8; j++)
