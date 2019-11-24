@@ -16,7 +16,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 		uint32_t cache_number = ((paddr + i) >> 6) & 0x7f;
 		uint32_t block_addr = (paddr + i) & 0x3f;
 		bool exist = false;
-		for (int j = 0; j < 8; i++)
+		for (int j = 0; j < 8; j++)
 		{
 			if (L1_dcache[cache_number][j].valid && L1_dcache[cache_number][j].tag == tag)
 			{
