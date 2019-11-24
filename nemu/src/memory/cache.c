@@ -1,5 +1,4 @@
 #include "memory/cache.h"
-#include <stdlib.h>
 
 void init_cache()
 {
@@ -33,7 +32,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 				if (!L1_dcache[cache_number][j].valid)
 					break;
 			if (j ==  8)
-				j = rand() % 8;
+				j = 2;
 			memcpy(L1_dcache[cache_number][j].data, hw_mem + ((paddr + i) & (~0x3f)), 64);
 			L1_dcache[cache_number][j].valid = 1;
 			L1_dcache[cache_number][j].tag = tag;
