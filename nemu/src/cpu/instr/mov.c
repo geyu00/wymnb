@@ -88,6 +88,7 @@ make_instr_func(mov_c2r_l)
 	operand_read(&r);
 	c.val = r.val;
 	operand_write(&c);
+	print_asm_2("mov", "", len, &c, &r);
 	return len;
 }
 
@@ -102,12 +103,24 @@ make_instr_func(mov_r2c_l)
 	operand_read(&c);
 	r.val = c.val;
 	operand_write(&r);
+	print_asm_2("mov", "", len, &r, &c);
 	return len;
 }
 
 make_instr_func(mov_rm2s_w)
 {
-	
+	int len = 1;
+	OPERAND s, rm;
+	s.data_size = 16;
+	rm.data_size = 16;
+	len += modrm_r_rm(eip + 1, &s, &rm);
+	s.type = OPR_SREG;
+	operand_read(&rm);
+	s.val = rm.val;
+	operand_write(&s);
+	print_asm_2("mov", "w", len, &rm, &s);
+	load_sreg(s.addr);
+	return len;
 }
 
 
