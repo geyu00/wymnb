@@ -71,6 +71,12 @@ typedef struct
 		};
 		struct {
 			uint32_t base;
+			uint32_t limit;
+			uint32_t type : 5;
+			uint32_t privilege_level : 2;
+			uint32_t soft_use : 1;
+		};
+	}SegReg;
 	// segment registers, todo: define type SegReg
 	union {
 		SegReg segReg[6];
