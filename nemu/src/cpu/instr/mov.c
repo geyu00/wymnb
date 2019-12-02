@@ -105,9 +105,10 @@ make_instr_func(mov_r2c_l)
 	return len;
 }
 
-
-
-
+make_instr_func(mov_rm2s_w)
+{
+	
+}
 
 
 
