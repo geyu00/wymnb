@@ -47,6 +47,7 @@ extern uint8_t data_size;
 #include "cpu/instr/group.h"
 #include "cpu/instr/special.h"
 #include "cpu/instr/x87.h"
+#include "cpu/instr/lgdt.h"
 
 /* TODO: add more instructions here */
 
