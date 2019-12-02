@@ -85,6 +85,18 @@ typedef struct
 			SegReg es, cs, ss, ds, fs, gs;
 		};
 	};
+	typedef union {
+		struct {
+			uint32_t pe :1;
+			uint32_t mp :1;
+uint32_t em :1;
+uint32_t ts :1;
+uint32_t et :1;
+uint32_t reserve :26;
+uint32_t pg :1;
+};
+uint32_t val; 
+}CR0;
 	// control registers, todo: define type CR0
 	CR0 cr0;
 #else
