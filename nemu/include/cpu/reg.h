@@ -60,7 +60,17 @@ typedef struct
 		uint32_t base : 32;
 	}GDTR;
 	GDTR gdtr; // GDTR, todo: define type GDTR
-	
+	typedef struct {
+		union {
+			uint16_t val;
+			struct {
+				uint32_t rpl : 2;
+				uint32_t ti : 1;
+				uint32_t index : 13;
+			};
+		};
+		struct {
+			uint32_t base;
 	// segment registers, todo: define type SegReg
 	union {
 		SegReg segReg[6];
