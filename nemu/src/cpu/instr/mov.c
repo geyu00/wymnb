@@ -124,10 +124,11 @@ make_instr_func(mov_rm2s_w)
 	s.data_size = 16;
 	rm.data_size = 16;
 	len += modrm_r_rm(eip + 1, &s, &rm);
-	s.type = OPR_SREG;
+	//s.type = OPR_SREG;
 	operand_read(&rm);
-	s.val = rm.val;
-	operand_write(&s);
+	//s.val = rm.val;
+	//operand_write(&s);
+	cpu.segReg[s.addr].val = rm.val;
 	print_asm_2("mov", "w", len, &rm, &s);
 	load_sreg(s.addr);
 	return len;
