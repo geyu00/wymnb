@@ -117,9 +117,9 @@ make_instr_func(mov_r2c_l)
 	operand_read(&r);
 	//r.val = c.val;
 	//operand_write(&r);
-	if (r.addr == 3)
+	if (c.addr == 3)
 		cpu.cr3.val = r.val;
-	else if (r.addr == 0)
+	else if (c.addr == 0)
 		cpu.cr0.val = r.val;
 	print_asm_2("mov", "", len, &r, &c);
 	return len;
