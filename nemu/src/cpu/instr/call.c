@@ -14,9 +14,11 @@ make_instr_func(call_near)
 	//*(int *)cpu.esp = cpu.eip;
 	OPERAND tem;
 	tem.type = OPR_MEM;
-	tem.data_size = 32;
+	//tem.data_size = 32;
+	tem.data_size = data_size;
 	tem.addr = cpu.esp;
-	tem.val = cpu.eip + 1 + data_size / 8;
+	//tem.val = cpu.eip + 1 + data_size / 8;
+	tem.val = eip + 1 + data_size / 8;
 	operand_write(&tem);
 	
 
@@ -36,9 +38,10 @@ make_instr_func(call_near_indirect)
 	cpu.esp -= data_size / 8;
 	OPERAND tem;
 	tem.type = OPR_MEM;
-	tem.data_size = 32;
+	//tem.data_size = 32;
+	tem.data_size = data_size;
 	tem.addr = cpu.esp;
-	tem.val = cpu.eip + 1 + data_size / 8;
+	tem.val = eip + 1 + data_size / 8;
 	operand_write(&tem);
 
         print_asm_1("call", "", 1 + data_size / 8, &rel);
