@@ -45,6 +45,8 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 	assert(len == 1 || len == 2 || len == 4);//printf("@!#!");	
 	if (cpu.cr0.pg == 1)
 	{
+		printf("!  %d    !",cpu.cr0.val;
+		printf("!  %d    !",cpu.cr3.val;
 		if ((laddr & 0xfff) + len > 0x1000)
 		{
 			assert(0);
