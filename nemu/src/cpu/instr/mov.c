@@ -105,12 +105,13 @@ make_instr_func(mov_r2c_l)
 	len += modrm_r_rm(eip + 1, &c, &r);
 	c.type = OPR_CREG;
 	operand_read(&c);
+	operand_read(&r);
 	//r.val = c.val;
 	//operand_write(&r);
 	if (r.addr == 3)
-		cpu.gpr[3].val = cpu.cr3.val;
+		cpu.cr3.val = r.val;
 	else if (r.addr == 0)
-		cpu.gpr[0].val = cpu.cr0.val;
+		cpu.cr0.val = r.val;
 	print_asm_2("mov", "", len, &r, &c);
 	return len;
 }
