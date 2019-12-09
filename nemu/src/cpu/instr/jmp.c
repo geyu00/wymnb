@@ -64,7 +64,7 @@ make_instr_func(jmp_far_imm)
 
 	rel2.type = OPR_IMM;
 	rel2.sreg = SREG_CS;
-	rel2.addr = eip + 1;
+	rel2.addr = eip + 5;
 	rel2.data_size = 16;
 	operand_read(&rel2);
 	cpu.cs.val = rel2.val;
