@@ -42,6 +42,8 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 
 uint32_t laddr_read(laddr_t laddr, size_t len)
 {
+	printf("!  %d    !",cpu.cr0.val);
+	printf("!  %d    !",cpu.cr3.val);
 	assert(len == 1 || len == 2 || len == 4);//printf("@!#!");	
 	if (cpu.cr0.pg == 1)
 	{
