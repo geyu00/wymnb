@@ -47,7 +47,7 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 	assert(len == 1 || len == 2 || len == 4);//printf("@!#!");	
 	if (cpu.cr0.pg == 1 && cpu.cr0.pe == 1)
 	{
-		if ((laddr & 0xfff) + len > 0x1000)
+		/*if ((laddr & 0xfff) + len > 0x1000)
 		{
 			assert(0);
 		}
@@ -56,7 +56,9 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 					
 			paddr_t paddr = page_translate(laddr);
 			return paddr_read(paddr, len);
-		}
+		}*/
+		paddr_t paddr = page_translate(laddr);
+		return paddr_read(paddr, len);
 	}
 	else
 		return paddr_read(laddr, len);
@@ -67,7 +69,7 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 	assert(len == 1 || len == 2 || len == 4);
 	if (cpu.cr0.pg == 1 && cpu.cr0.pe == 1)
 	{
-		if ((laddr & 0xfff) + len > 0x1000)
+		/*if ((laddr & 0xfff) + len > 0x1000)
 		{
 			assert(0);
 		}
@@ -76,7 +78,9 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 			//printf("@!#!");			
 			paddr_t paddr = page_translate(laddr);
 			paddr_write(paddr, len, data);
-		}
+		}*/
+		paddr_t paddr = page_translate(laddr);
+		paddr_write(paddr, len, data);
 	}
 	else
 		paddr_write(laddr, len, data);
