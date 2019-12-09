@@ -89,9 +89,17 @@ make_instr_func(mov_c2r_l)
 	//c.val = r.val;
 	//operand_write(&c);
 	if (r.addr == 3)
-		cpu.gpr[3].val = cpu.cr3.val;
+	{
+		//cpu.gpr[3].val = cpu.cr3.val;
+		opr_dest.val=cpu.cr3.val;
+		operand_write(&opr_dest);
+	}
 	else if (r.addr == 0)
-		cpu.gpr[0].val = cpu.cr0.val;
+	{
+		//cpu.gpr[0].val = cpu.cr0.val;
+		opr_dest.val=cpu.cr0.val;
+		operand_write(&opr_dest);
+	}
 	print_asm_2("mov", "", len, &c, &r);
 	return len;
 }
