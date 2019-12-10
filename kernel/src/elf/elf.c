@@ -37,7 +37,9 @@ uint32_t loader()
 		if (ph->p_type == PT_LOAD)
 		{
 #ifdef IA32_PAGE	
+			Log("vaddr:%x",ph->p_vaddr);
 			ph->p_vaddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
+			Log("paddr:%x",ph->p_vaddr);
 #endif
 			// remove this panic!!!
 			//panic("Please implement the loader");
