@@ -12,8 +12,11 @@ paddr_t page_translate(laddr_t laddr)
 	uint32_t dir = laddr >> 22;
 	uint32_t page = (laddr >> 12) & 0x3ff;
 	uint32_t offset = laddr & 0xfff;
-	uint32_t mulu = (dir << 2) + (cpu.cr3.pdbr << 12);
-	uint32_t base = (paddr_read(mulu, 4) & 0xfffff000) + (page << 2);
+	uint32_t page_addr = (dir << 2) + (cpu.cr3.pdbr << 12);
+	PDE t_pde;
+	t_pde.val = paddr_read(page_addr, 4);
+	assert(pde.present == 1);
+	uint32_t base = (t_pde.page_frame << 12) + (page << 2);
 	return ((paddr_read(base, 4) & 0xfffff000) | offset);
 #else
 	return tlb_read(laddr) | (laddr & PAGE_MASK);
