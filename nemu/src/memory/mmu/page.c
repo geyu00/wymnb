@@ -18,9 +18,9 @@ paddr_t page_translate(laddr_t laddr)
 	assert(t_pde.present == 1);
 	uint32_t base = (t_pde.page_frame << 12) + (page << 2);
 	PTE t_pte;
-	t_pde.val = paddr_read(base, 4);
+	t_pte.val = paddr_read(base, 4);
 	assert(t_pte.present == 1);
-	return ((t_pde.page_frame << 12) + offset);
+	return ((t_pte.page_frame << 12) + offset);
 #else
 	return tlb_read(laddr) | (laddr & PAGE_MASK);
 	;
