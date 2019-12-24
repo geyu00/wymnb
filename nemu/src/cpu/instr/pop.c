@@ -22,3 +22,21 @@ static void instr_execute_1op()
 make_instr_impl_1op(pop, r, v)
 make_instr_impl_1op(pop, rm, v)
 make_instr_impl_1op(pop, i, b)
+
+make_instr_func(popa)
+{
+	for (int i = 7; i >= 0; i--)
+	{
+		
+		OPERAND dest;
+		dest.data_size = data_size;
+		dest.type = OPR_MEM;
+		dest.sreg = SREG_SS;
+		dest.addr = cpu.esp;
+		operand_read(&dest);
+		cpu.esp += 4;
+		if (i != 4)
+			cpu.gpr[i].val = dest.val;
+	}
+	return 1;
+}
