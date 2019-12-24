@@ -40,10 +40,10 @@ void raise_intr(uint8_t intr_no)
 	gatedesc.val[0] = laddr_read(addr, 4);
 	gatedesc.val[1] = laddr_read(addr + 4, 4);
 	//assert(gatedesc.present == 1);
-	if (gatedesc.type == 0xe)
-		cpu.eflags.IF = 0;
 	cpu.cs.val = gatedesc.selector;
 	load_sreg(SREG_CS);
+	if (gatedesc.type == 0xe)
+		cpu.eflags.IF = 0;
 	cpu.eip = (gatedesc.offset_31_16 << 16) | gatedesc.offset_15_0;
 #endif
 }
