@@ -8,6 +8,12 @@ typedef struct {
 	uint32_t limit : 16;
 	uint32_t base : 32;
 }GDTR;
+
+typedef struct {
+	uint32_t limit : 16;
+	uint32_t base : 32;
+}IDTR;
+
 typedef struct {
 	union {
 		uint16_t val;
@@ -25,6 +31,7 @@ typedef struct {
 		uint32_t soft_use : 1;
 	};
 }SegReg;
+
 typedef union {
 	struct {
 		uint32_t pe :1;
@@ -37,6 +44,7 @@ typedef union {
 	};
 	uint32_t val; 
 }CR0;
+
 typedef union {
 	struct {
 		uint32_t reserve :12;
@@ -44,6 +52,7 @@ typedef union {
 	};
 	uint32_t val; 
 }CR3;
+
 typedef struct
 {
 	// general purpose registers
