@@ -55,19 +55,20 @@ make_instr_func(iret)
 	dest1.type = OPR_MEM;
 	dest1.sreg = SREG_SS;
 	dest1.addr = cpu.esp;
-	operand_write(&dest1);
+	operand_read(&dest1);
 	cpu.esp += 4;
 	cpu.eip = dest1.val;
 
 	//pop cs
 	OPERAND dest2;
-	dest2.data_size = 16;
+	dest2.data_size = 32;
 	dest2.type = OPR_MEM;
 	dest2.sreg = SREG_SS;
 	dest2.addr = cpu.esp;
-	operand_write(&dest2);
+	operand_read(&dest2);
 	cpu.esp += 4;
-	cpu.cs.val = sign_ext(dest2.val, 32);
+	//cpu.cs.val = sign_ext(dest2.val, 32);
+	cpu.cs.val = dest2.val;
 
 	//pop eflags
 	OPERAND dest3;
@@ -75,7 +76,7 @@ make_instr_func(iret)
 	dest3.type = OPR_MEM;
 	dest3.sreg = SREG_SS;
 	dest3.addr = cpu.esp;
-	operand_write(&dest3);
+	operand_read(&dest3);
 	cpu.esp += 4;
 	cpu.eflags.val = dest3.val;
 
