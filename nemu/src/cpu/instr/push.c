@@ -34,3 +34,33 @@ make_instr_impl_1op(push, r, v)
 make_instr_impl_1op(push, rm, v)
 make_instr_impl_1op(push, i, b)
 make_instr_impl_1op(push, i, v)
+
+make_instr_func(pusha)
+{
+	uint32_t tem_esp = cpu.esp;
+	for (int i = 0; i < 8; i++)
+	{
+		cpu.esp -= 4;
+		OPERAND src;
+		src.data_size = data_size;
+		src.type = OPR_MEM;
+		src.sreg = SREG_SS;
+		src.addr = cpu.esp;
+		if (data_size == 16)
+		{
+			if (i != 4)
+				src.val = cpu.gpr[i]._16;
+			else
+				src.val = tem_esp & 0xFFFF;
+		}
+		else if (data_size == 32)
+		{
+			if (i != 4)
+				src.val = cpu.gpr[i]._32;
+			else
+				src.val = tem_esp;
+		}
+		operand_write(&src);
+	}
+	return 1;
+}
