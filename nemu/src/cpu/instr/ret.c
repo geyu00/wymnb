@@ -61,13 +61,13 @@ make_instr_func(iret)
 
 	//pop cs
 	OPERAND dest2;
-	dest2.data_size = 32;
+	dest2.data_size = 16;
 	dest2.type = OPR_MEM;
 	dest2.sreg = SREG_SS;
 	dest2.addr = cpu.esp;
 	operand_write(&dest2);
 	cpu.esp += 4;
-	cpu.cs.val = dest2.val;
+	cpu.cs.val = sign_ext(dest2.val, 32);
 
 	//pop eflags
 	OPERAND dest3;
