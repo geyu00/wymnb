@@ -36,7 +36,7 @@ void raise_intr(uint8_t intr_no)
 	operand_write(&src3);
 
 	GateDesc gatedesc;
-	laddr_t addr = cpu.idtr.base + sizeof(GateDesc) * intr_no;
+	laddr_t addr = cpu.idtr.base + 8 * intr_no;
 	gatedesc.val[0] = laddr_read(addr, 4);
 	gatedesc.val[1] = laddr_read(addr + 4, 4);
 	//assert(gatedesc.present == 1);
