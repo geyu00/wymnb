@@ -37,17 +37,20 @@ uint32_t loader()
 		if (ph->p_type == PT_LOAD)
 		{
 
-#ifdef IA32_PAGE
-			uint32_t paddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
-#ifdef HAS_DEVICE_IDE
-			ide_read((uint8_t *)paddr, (uint32_t)ph->p_offset, ph->p_filesz);
-#else
-			memcpy((void *)paddr, (void *)ph->p_offset, ph->p_filesz);
+#ifdef IA32_PAGE	
+			Log("vaddr:%x",ph->p_vaddr);
+			ph->p_vaddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
+			Log("paddr:%x",ph->p_vaddr);
 #endif
-			memset((void *)(paddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
+			// remove this panic!!!
+			//panic("Please implement the loader");
+#ifdef HAS_DEVICE_IDE
+			ide_read((void*)ph->p_vaddr, (uint32_t)ph->p_offset, ph->p_filesz);
 #else
-			memcpy((void *)ph->p_vaddr, (void *)ph->p_offset, ph->p_filesz);
-			memset((void *)(ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
+			memcpy((void*)ph->p_vaddr, (void*)ph->p_offset, ph->p_filesz);
+/* TODO: copy the segment from the ELF file to its proper memory area */
+			memset((void*)(ph->p_vaddr + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);
+/* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 #endif
 
 #ifdef IA32_PAGE
