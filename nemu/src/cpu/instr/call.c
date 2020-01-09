@@ -38,6 +38,7 @@ make_instr_func(call_near_indirect)
 	cpu.esp -= data_size / 8;
 	OPERAND tem;
 	tem.type = OPR_MEM;
+	tem.sreg = SREG_SS;
 	//tem.data_size = 32;
 	tem.data_size = data_size;
 	tem.addr = cpu.esp;
