@@ -36,7 +36,7 @@ make_instr_func(call_near_indirect)
 	len += modrm_rm(eip + 1, &rel);
         operand_read(&rel);
 
-	cpu.esp -= data_size / 8;
+	cpu.esp -= 4;
 	OPERAND tem;
 	tem.type = OPR_MEM;
 	//tem.sreg = SREG_SS;
