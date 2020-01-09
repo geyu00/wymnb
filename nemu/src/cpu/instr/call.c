@@ -27,7 +27,7 @@ make_instr_func(call_near)
         return 1 + data_size / 8;	
 }
 
-/*make_instr_func(call_near_indirect)
+make_instr_func(call_near_indirect)
 {
 	int len = 1;
 	OPERAND rel;
@@ -56,71 +56,4 @@ make_instr_func(call_near)
 	}
 	return 0;
 	
-}*/
-make_instr_func(call_near_indirect)
-
-{
-
-	OPERAND mem;
-
-	mem.type = OPR_MEM;
-
-	//printf("%d\n",520);
-
-	//mem.sreg = SREG_CS;
-
-	mem.data_size = data_size;
-
-	int len = 1;
-
-	len += modrm_rm(eip + 1,&mem);
-
-	operand_read(&mem);
-
-	//push
-
-	OPERAND src;
-
-	src.data_size = data_size;
-
-	src.type = OPR_MEM;
-
-	src.sreg = SREG_SS;
-
-	cpu.esp = cpu.esp - 4;
-
-	src.addr = cpu.esp;
-
-	src.val = cpu.eip + len;
-
-	operand_write(&src);
-
-	//printf("%x\n",mem.val);
-
-	if(data_size==16)
-
-	{
-
-		cpu.eip = cpu.eip>>16;
-
-		cpu.eip = cpu.eip<<16;
-
-		cpu.eip += mem.val;
-
-		cpu.eip = cpu.eip &0x0000FFFF;
-
-	}
-
-	else
-
-	{
-
-		cpu.eip = mem.val;
-
-	}
-
-	return 0;
-
-	
-
 }
