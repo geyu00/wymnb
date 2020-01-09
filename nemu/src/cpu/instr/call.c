@@ -36,7 +36,7 @@ make_instr_func(call_near_indirect)
 	len += modrm_rm(eip + 1, &rel);
         operand_read(&rel);
 
-	cpu.esp -= 4;
+	cpu.esp -= data_size / 8;
 	OPERAND tem;
 	tem.type = OPR_MEM;
 	//tem.sreg = SREG_SS;
@@ -48,6 +48,11 @@ make_instr_func(call_near_indirect)
 	operand_write(&tem);
 
         print_asm_1("call", "", 1 + data_size / 8, &rel);
-        cpu.eip = rel.val;
-        return 0;
+	if (data_size == 32)
+	        cpu.eip = rel.val;
+	else if (data_size == 16)
+	{
+		cpu.eip = rel.val & 0x0000FFFF;
+	}
+	return 0;
 }
