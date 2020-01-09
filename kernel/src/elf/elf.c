@@ -44,7 +44,7 @@ uint32_t loader()
 			// remove this panic!!!
 			//panic("Please implement the loader");
 #ifdef HAS_DEVICE_IDE
-			ide_write((void*)ph->p_vaddr, (uint32_t)ph->p_offset, ph->p_filesz);
+			ide_read((void*)ph->p_vaddr, (uint32_t)ph->p_offset, ph->p_filesz);
 #else
 			memcpy((void*)ph->p_vaddr, (void*)ph->p_offset, ph->p_filesz);
 /* TODO: copy the segment from the ELF file to its proper memory area */
