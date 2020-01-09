@@ -16,7 +16,7 @@ void create_video_mapping()
 	 * [0xa0000, 0xa0000 + SCR_SIZE) for user program. You may define
 	 * some page tables to create this mapping.
 	 */
-
+	get_updir(1);
 	panic("please implement me");
 }
 
