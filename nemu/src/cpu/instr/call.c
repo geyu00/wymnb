@@ -31,6 +31,7 @@ make_instr_func(call_near_indirect)
 {
 	int len = 1;
 	OPERAND rel;
+	rel.type = OPR_MEM;
         rel.data_size = data_size;
 	len += modrm_rm(eip + 1, &rel);
         operand_read(&rel);
