@@ -44,7 +44,7 @@ make_instr_func(call_near_indirect)
 	tem.data_size = data_size;
 	tem.addr = cpu.esp;
 	//tem.val = eip + 1 + data_size / 8;
-	tem.val = eip;
+	tem.val = eip + len;
 	operand_write(&tem);
 
         print_asm_1("call", "", 1 + data_size / 8, &rel);
