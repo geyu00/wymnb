@@ -42,7 +42,7 @@ void create_video_mapping()
 		}
 	}*/
 	pdir->val = make_pde(ptable);
-	for(int i = 0; i < NR_PT ; i++)
+	for(int i = 0; i < (PAGE_SIZE + SCR_SIZE -1) / PAGE_SIZE ; i++)
 	{
 		vptable[VMEM_ADDR / PAGE_SIZE + i].val = make_pte(VMEM_ADDR + i* PAGE_SIZE);
 	}
