@@ -2,6 +2,6 @@
 #define __INSTR_OUT_H__
 
 make_instr_func(out_b);
-make_instr_func(our_v);
+make_instr_func(out_v);
 
 #endif
