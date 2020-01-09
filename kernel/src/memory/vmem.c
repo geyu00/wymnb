@@ -6,6 +6,9 @@
 #define SCR_SIZE (320 * 200)
 #define NR_PT ((SCR_SIZE + PT_SIZE - 1) / PT_SIZE) // number of page tables to cover the vmem
 
+PDE vpdir[NR_PDE] align_to_page;				// kernel page directory
+PTE vptable[NR_PTE] align_to_page; // kernel page tables
+
 PDE *get_updir();
 
 void create_video_mapping()
@@ -16,9 +19,29 @@ void create_video_mapping()
 	 * [0xa0000, 0xa0000 + SCR_SIZE) for user program. You may define
 	 * some page tables to create this mapping.
 	 */
-int i;
-	get_updir(i);
 	panic("please implement me");
+
+
+	PDE *pdir = (PDE *)va_to_pa(vpdir);
+	PTE *ptable = (PTE *)va_to_pa(vptable);
+	uint32_t pdir_idx, ptable_idx, pframe_idx;
+
+	/* make all PDE invalid */
+	memset(pdir, 0, NR_PDE * sizeof(PDE));
+
+	/* fill PDEs and PTEs */
+	pframe_idx = 0;
+	for (pdir_idx = 0; pdir_idx < PHY_MEM / PT_SIZE; pdir_idx++)
+	{
+		pdir[pdir_idx].val = make_pde(ptable);
+		pdir[pdir_idx + KOFFSET / PT_SIZE].val = make_pde(ptable);
+		for (ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx++)
+		{
+			ptable->val = make_pte(pframe_idx << 12);
+			pframe_idx++;
+			ptable++;
+		}
+	}
 }
 
 void video_mapping_write_test()
