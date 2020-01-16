@@ -25,24 +25,15 @@ void create_video_mapping()
 
 	PDE *pdir = get_updir();
 	PTE *ptable = (PTE*)va_to_pa(vptable);
-	uint32_t pdir_idx, ptable_idx, pframe_idx;
-	pframe_idx = 0;
-	for(pdir_idx = 0; pdir_idx < 1; pdir_idx++)
+	//uint32_t pdir_idx, ptable_idx, pframe_idx;
+	//pframe_idx = 0;
+	pdir[pdir_idx].val = make_pde(ptable);
+	pdir[pdir_idx + KOFFSET / PT_SIZE].val = make_pde(ptable);
+	for(ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx++)
 	{
-		//if(pframe_idx > 0xaf)break;
-		pdir[pdir_idx].val = make_pde(ptable);
-pdir[pdir_idx + KOFFSET / PT_SIZE].val = make_pde(ptable);
-		for(ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx++)
-		{
-			/*if(pframe_idx > 0xaf)break;
-			if(pframe_idx < 0xa0)
-				ptable->val = 0;
-			else
-				ptable->val = make_pte(pframe_idx << 12);*/
-			ptable->val = make_pte(pframe_idx << 12);
-			pframe_idx++;
-			ptable++;
-		}
+		ptable->val = make_pte(pframe_idx << 12);
+		pframe_idx++;
+		//ptable++;
 	}
 }
 
