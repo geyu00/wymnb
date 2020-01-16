@@ -30,6 +30,7 @@ void create_video_mapping()
 	for(pdir_idx = 0; pdir_idx < PHY_MEM / PT_SIZE; pdir_idx ++){
 		//if(pframe_idx > 0xaf){break;}
 		pdir[pdir_idx].val = make_pde(ptable);
+		pdir[pdir_idx + KOFFSET / PT_SIZE].val = make_pde(ptable);
 		for(ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx++){
 			/*if(pframe_idx > 0xaf){
 				break;
