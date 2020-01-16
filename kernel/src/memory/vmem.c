@@ -27,7 +27,7 @@ void create_video_mapping()
 	PTE *ptable = (PTE*)va_to_pa(vptable);
 	uint32_t pdir_idx, ptable_idx, pframe_idx;
 	pframe_idx = 0;
-	for(pdir_idx = 0; pdir_idx < 2; pdir_idx++)
+	for(pdir_idx = 0; pdir_idx < 1; pdir_idx++)
 	{
 		//if(pframe_idx > 0xaf)break;
 		pdir[pdir_idx].val = make_pde(ptable);
