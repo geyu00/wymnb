@@ -34,8 +34,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect,
 
 	for (int i = h - 1; i >= 0; i--)
 	{
-		uint8_t* src_addr = src->pixels + (sy + i) * src->pitch + sx;
-		uint8_t* dst_addr = dst->pixels + (dy + i) * dst->pitch + dx;
+		uint8_t* src_addr = (uint8_t*)src->pixels + (sy + i) * src->pitch + sx;
+		uint8_t* dst_addr = (uint8_t*)dst->pixels + (dy + i) * dst->pitch + dx;
 		memcpy(dst_addr, src_addr, w);
 	}
 }
@@ -60,7 +60,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color)
 	{
 		for (int j = 0; j < w; j++)
 		{
-			uint8_t* addr = dst->pixels + (y + i) * dst->pitch + x + j;
+			uint8_t* addr = (uint8_t*)dst->pixels + (y + i) * dst->pitch + x + j;
 			*addr = color;
 		}
 	}
