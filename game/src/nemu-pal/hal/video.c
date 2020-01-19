@@ -12,25 +12,32 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect,
 {
 	assert(dst && src);
 
-	//int sx = (srcrect == NULL ? 0 : srcrect->x);
-	//int sy = (srcrect == NULL ? 0 : srcrect->y);
-	//int dx = (dstrect == NULL ? 0 : dstrect->x);
-	//int dy = (dstrect == NULL ? 0 : dstrect->y);
-	//int w = (srcrect == NULL ? src->w : srcrect->w);
-	//int h = (srcrect == NULL ? src->h : srcrect->h);
-	//if(dst->w - dx < w) { w = dst->w - dx; }
-	//if(dst->h - dy < h) { h = dst->h - dy; }
-	//if(dstrect != NULL) {
-	//	dstrect->w = w;
-	//	dstrect->h = h;
-	//}
+	int sx = (srcrect == NULL ? 0 : srcrect->x);
+	int sy = (srcrect == NULL ? 0 : srcrect->y);
+	int dx = (dstrect == NULL ? 0 : dstrect->x);
+	int dy = (dstrect == NULL ? 0 : dstrect->y);
+	int w = (srcrect == NULL ? src->w : srcrect->w);
+	int h = (srcrect == NULL ? src->h : srcrect->h);
+	if(dst->w - dx < w) { w = dst->w - dx; }
+	if(dst->h - dy < h) { h = dst->h - dy; }
+	if(dstrect != NULL) {
+		dstrect->w = w;
+		dstrect->h = h;
+	}
 
 	/* TODO: copy pixels from position (`sx', `sy') with size
 	 * `w' X `h' of `src' surface to position (`dx', `dy') of
 	 * `dst' surface.
 	 */
 
-	assert(0);
+	//assert(0);
+
+	for (int i = 0; i < h; i++)
+	{
+		uint8_t* src_addr = src->pixels + (sy + i) * src->pitch + sx;
+		uint8_t* dst_addr = dst->pixels + (dy + i) * dst->pitch + dx;
+		memcpy(dst_addr, src_addrr, w);
+	}
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color)
