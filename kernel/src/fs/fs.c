@@ -60,6 +60,7 @@ size_t fs_read(int fd, void *buf, size_t len)
 	if (len > size - files[fd].offset)
 		len = size - files[fd].offset;
 	ide_read(buf, disk_offset + files[fd].offset, len);
+	files[fd].offset += len;
 	//panic("Please implement fs_read at fs.c");
 	return len;
 }
