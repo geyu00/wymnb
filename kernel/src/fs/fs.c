@@ -37,7 +37,7 @@ void ide_write(uint8_t *, uint32_t, uint32_t);
 
 int fs_open(const char *pathname, int flags)
 {
-	//panic("Please implement fs_open at fs.c");
+	panic("Please implement fs_open at fs.c");
 	int i = 0;
 	while (i < NR_FILES && strcmp(pathname, file_table[i].name)!= 0) i++;
 	assert(i < NR_FILES);
