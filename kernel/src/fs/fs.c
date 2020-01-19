@@ -37,8 +37,15 @@ void ide_write(uint8_t *, uint32_t, uint32_t);
 
 int fs_open(const char *pathname, int flags)
 {
-	panic("Please implement fs_open at fs.c");
-	return -1;
+	//panic("Please implement fs_open at fs.c");
+	int i = 0;
+	while (i < NR_FILES && strcmp(filename, file_table[i].name)!= 0) num++;
+	assert(i < NR_FILES);
+	int position = i + 3;
+	files[position].used = true;
+	files[position].index = i;
+	files[position].offset = 0;
+	return position;
 }
 
 size_t fs_read(int fd, void *buf, size_t len)
