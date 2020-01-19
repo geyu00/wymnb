@@ -126,6 +126,9 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 
 int fs_close(int fd)
 {
-	panic("Please implement fs_close at fs.c");
-	return -1;
+	//panic("Please implement fs_close at fs.c");
+	assert(fd > 2);
+	assert(fd < NR_FILES + 3);
+	files[fd].used = false;
+	return 0;
 }
