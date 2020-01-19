@@ -73,7 +73,28 @@ bool process_keys(void (*key_press_callback)(int), void (*key_release_callback)(
 	 * Remember to enable interrupts before returning from the function.
 	 */
 
-	bool flag = false;
+	bool temp = false;
+	for(int i = 0 ; i < NR_KEYS; i++)
+	{
+		if(key_state[i] == KEY_STATE_PRESS)//an xia
+		{
+			temp = true;
+			key_state[i] = KEY_STATE_WAIT_RELEASE;
+			key_press_callback(get_keycode(i));
+			break;
+		}
+		else if(key_state[i] == KEY_STATE_RELEASE)
+		{
+			temp = true;
+			key_state[i] = KEY_STATE_EMPTY;
+			key_release_callback(get_keycode(i));
+			break;
+		}
+	}
+	sti();
+	return temp;
+
+	/*bool flag = false;
 	for (int i = 0; i < NR_KEYS; i++)
 	{
 		if (query_key(i) == KEY_STATE_PRESS)
@@ -94,5 +115,5 @@ bool process_keys(void (*key_press_callback)(int), void (*key_release_callback)(
 
 	//assert(0);
 	sti();
-	return flag;
+	return flag;*/
 }
