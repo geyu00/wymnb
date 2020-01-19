@@ -29,7 +29,7 @@ void create_video_mapping()
 		vptable[VMEM_ADDR / PAGE_SIZE + i].val = make_pte(VMEM_ADDR + i* PAGE_SIZE);
 	}*/
 	PDE *pdir = get_updir();
-	PTE *ptable = (PTE*)va_to_pa(mptable);
+	PTE *ptable = (PTE*)va_to_pa(vptable);
 	uint32_t pdir_idx, ptable_idx, pframe_idx;
 	pframe_idx = 0;
 	for(pdir_idx = 0; pdir_idx < 2; pdir_idx ++){
