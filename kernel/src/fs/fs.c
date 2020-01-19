@@ -99,8 +99,29 @@ size_t fs_write(int fd, void *buf, size_t len)
 
 off_t fs_lseek(int fd, off_t offset, int whence)
 {
-	panic("Please implement fs_lseek at fs.c");
-	return -1;
+	//panic("Please implement fs_lseek at fs.c");
+	assert(fd > 2);
+	assert(fd < NR_FILES + 3);
+	uint32_t index = files[fd].index;
+	switch (whence)
+	{
+		case SEEK_SET:
+		{
+			files[fd].offset = offset;
+			return files[fd].offset;
+		}
+		case SEEK_CUR:
+		{
+			files[fd].offset += offset;
+			return files[fd].offset;
+		}
+		case SEEK_END:
+		{
+			files[fd].offset = file_table[index].size + offset;
+			return files[fd].offset;
+		}
+	}
+	
 }
 
 int fs_close(int fd)
