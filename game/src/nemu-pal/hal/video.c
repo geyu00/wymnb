@@ -36,7 +36,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect,
 	{
 		uint8_t* src_addr = src->pixels + (sy + i) * src->pitch + sx;
 		uint8_t* dst_addr = dst->pixels + (dy + i) * dst->pitch + dx;
-		memcpy(dst_addr, src_addrr, w);
+		memcpy(dst_addr, src_addr, w);
 	}
 }
 
