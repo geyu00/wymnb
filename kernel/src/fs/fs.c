@@ -106,20 +106,14 @@ off_t fs_lseek(int fd, off_t offset, int whence)
 	switch (whence)
 	{
 		case SEEK_SET:
-		{
 			files[fd].offset = offset;
 			return files[fd].offset;
-		}
 		case SEEK_CUR:
-		{
 			files[fd].offset += offset;
 			return files[fd].offset;
-		}
 		case SEEK_END:
-		{
 			files[fd].offset = file_table[index].size + offset;
 			return files[fd].offset;
-		}
 	}
 	return -1;
 }
