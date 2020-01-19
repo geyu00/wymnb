@@ -21,35 +21,23 @@ void create_video_mapping()
 	 */
 	//panic("please implement me");
 
-	PDE *dir = get_updir();
-	uint32_t* temp= va_to_pa(vptable);
-	dir->val = make_pde(temp);
-	for(int i = 0; i < (PAGE_SIZE + SCR_SIZE -1) / PAGE_SIZE ; i++)
-	{
-		vptable[VMEM_ADDR / PAGE_SIZE + i].val = make_pte(VMEM_ADDR + i* PAGE_SIZE);
-	}
-	/*PDE *pdir = get_updir();
+	PDE *pdir = get_updir();
 	PTE *ptable = (PTE*)va_to_pa(vptable);
 	uint32_t pdir_idx, ptable_idx, pframe_idx;
 	pframe_idx = 0;
-	for(pdir_idx = 0; pdir_idx < 1; pdir_idx ++){
-		if(pframe_idx > 0xaf){break;}
+	for(pdir_idx = 0; pdir_idx < 1; pdir_idx++){
+		if(pframe_idx > 0xaf) break;
 		pdir[pdir_idx].val = make_pde(ptable);
-		for(ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx++){
-			if(pframe_idx > 0xaf){
-				break;
-			}
-			if(pframe_idx < 0xa0){
-				ptable->val = 0;
-			}
-			else{
-				ptable->val = make_pte(pframe_idx << 12);
-			}
-			pframe_idx ++;
-			ptable ++;
+		for(ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx++)
+		{
+			if(pframe_idx > 0xaf) break;
+			if(pframe_idx < 0xa0) ptable->val = 0;
+			else ptable->val = make_pte(pframe_idx << 12);
+			pframe_idx++;
+			ptable++;
 		}
 	}
-	PDE *pdir = get_updir();
+	/*PDE *pdir = get_updir();
 	PTE *ptable = (PTE*)va_to_pa(vptable);
 	uint32_t pdir_idx, ptable_idx, pframe_idx;
 	pdir_idx = 0;
