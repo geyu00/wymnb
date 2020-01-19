@@ -66,20 +66,34 @@ size_t fs_read(int fd, void *buf, size_t len)
 
 size_t fs_write(int fd, void *buf, size_t len)
 {
-	assert(fd <= 2);
-#ifdef HAS_DEVICE_SERIAL
-	int i;
-	extern void serial_printc(char);
-	for (i = 0; i < len; i++)
+	if (fd <= 2)
 	{
-		serial_printc(((char *)buf)[i]);
-	}
+#ifdef HAS_DEVICE_SERIAL
+		int i;
+		extern void serial_printc(char);
+		for (i = 0; i < len; i++)
+		{
+			serial_printc(((char *)buf)[i]);
+		}
 #else
-	asm volatile(".byte 0x82"
-				 : "=a"(len)
-				 : "a"(4), "b"(fd), "c"(buf), "d"(len));
+		asm volatile(".byte 0x82"
+					 : "=a"(len)
+					 : "a"(4), "b"(fd), "c"(buf), "d"(len));
 #endif
-
+	}
+	else
+	{
+		assert(fd > 2);
+		assert(fd < NR_FILES + 3);
+		assert(files[fd].used == true);
+		assert(files[fd].offset >= 0);
+		uint32_t index = files[fd].index;
+		uint32_t size = file_table[index].size;
+		uint32_t disk_offset = file_table[index].disk_offset;
+		if (len > size - files[fd].offset)
+			len = size - files[fd].offset;
+		ide_write(buf, disk_offset + files[fd].offset, len);
+	}
 	return len;
 }
 
