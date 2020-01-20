@@ -45,7 +45,7 @@ void main_loop(void)
 		wait_intr();
 		if (audio_reload)
 		{
-			//Log("reload audio");
+			Log("reload audio");
 			// the time for write audio data must be less than the time for playing it
 			write_audio_data();
 			audio_reload = 0;
