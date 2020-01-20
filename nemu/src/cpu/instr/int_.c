@@ -11,6 +11,5 @@ make_instr_func(int_)
 	operand_read(&imm);
 	raise_sw_intr(imm.val);
 	print_asm_1("int" ,"", 1, &imm);
-
 	return 0;	
 }
