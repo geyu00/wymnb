@@ -56,7 +56,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color)
 	int y = (dstrect == NULL ? 0 : dstrect->y);
 	int w = (dstrect == NULL ? dst->w : dstrect->w);
 	int h = (dstrect == NULL ? dst->h : dstrect->h);
-	for (int i = h - 1; i >= 0; i--)
+	for (int i = 0; i < h; i++)
 	{
 		for (int j = 0; j < w; j++)
 		{
