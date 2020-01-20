@@ -32,7 +32,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect,
 
 	//assert(0);
 
-	for (int i = h - 1; i >= 0; i--)
+	for (int i = 0; i < h; i++)
 	{
 		uint8_t* src_addr = (uint8_t*)src->pixels + (sy + i) * src->pitch + sx;
 		uint8_t* dst_addr = (uint8_t*)dst->pixels + (dy + i) * dst->pitch + dx;
